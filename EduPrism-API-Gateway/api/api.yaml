@@ -1,0 +1,4690 @@
+openapi: 3.0.3
+info:
+  title: Swagger Petstore - OpenAPI 3.0
+  description: |-
+    Introducing EduPrism: a dynamic education platform offering a diverse range of courses taught by expert educators. With a design-first approach and integration of OpenAPI 3.0, EduPrism ensures a seamless user experience and invites collaborative enhancements from the community. Join us in shaping the future of education at https://eduprism.io.
+ 
+    Some useful links:
+    - [EduPrism Github Repo](https://github.com/swagger-api/swagger-petstore)
+  contact:
+    email: tanishKamboj@eduprism.net
+  version: 1.0.11
+servers:
+  - url: http://localhost:8000/
+  - url: http://localhost:8003/
+tags:
+  - name: Authentication
+    description: Everything about your authentication and Registering
+  - name: Educator-Course
+    description: Everything about your Educator service
+  - name: Admin
+    description: Everthing about admin microservice and all important API's to fill out data
+  - name: Learner
+    description: This is the Learner Microservice
+  - name: Learner - article
+    description: This is the Learner Microservice but all the tags are realted to articles
+securityDefinitions:
+  bearerAuth:
+    type: apiKey
+    name: Authorization
+    in: header
+paths:
+  /:
+    get:
+      tags:
+        - Admin
+      servers:
+        - url: http://localhost:8003 
+      summary: Retrieve Admin Backend Setup
+      responses:
+        '200':
+          description: Successfully retrieved Admin Backend Setup details.
+  /addCareerGoal:
+    post:
+      tags:
+        - Admin
+      servers:
+        - url: http://localhost:8003 
+      summary: Add Career Goal
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                career_goal_id:
+                  type: string
+                  example: "4"
+                career_goal_name:
+                  type: string
+                  example: "Learning Voyage"
+                career_goal_description:
+                  type: string
+                  example: "Embark on a lifelong learning voyage, exploring new frontiers of knowledge to thrive in the modern world."
+      responses:
+        '200':
+          description: Career goal added successfully.
+          content:
+            application/json:
+              example:
+                status: "Success"
+                data:
+                  career_goal_id: 4
+                  career_goal_name: "Learning Voyage"
+                  career_goal_description: "Embark on a lifelong learning voyage, exploring new frontiers of knowledge to thrive in the modern world."
+                  created_at: "2023-08-04T09:42:38.354Z"
+                  updated_at: "2023-08-04T09:42:38.354Z"
+                  _id: "64ccc80e40091e0ce592a0b9"
+  /addIndustryType:
+    post:
+      tags:
+        - Admin
+      servers:
+        - url: http://localhost:8003 
+      summary: Add Industry Type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                industry_type_id:
+                  type: integer
+                  example: 10
+                industry_type_name:
+                  type: string
+                  example: "Environmental and Sustainability"
+      responses:
+        '200':
+          description: Industry type added successfully.
+          content:
+            application/json:
+              example:
+                status: "Success"
+                data:
+                  industry_type_id: 10
+                  industry_type_name: "Environmental and Sustainability"
+                  created_at: "2023-08-04T09:51:25.379Z"
+                  updated_at: "2023-08-04T09:51:25.379Z"
+                  _id: "64ccca1d4988e1306b2f3452"
+  /addSkillInterset:
+    post:
+      tags:
+        - Admin
+      servers:
+        - url: http://localhost:8003 
+      summary: Add Skill Interest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                industry_type_id:
+                  type: integer
+                  example: 10
+                skill_interest_id:
+                  type: integer
+                  example: 50
+                skill_name:
+                  type: string
+                  example: "Conservation Biology"
+      responses:
+        '200':
+          description: Skill interest added successfully.
+          content:
+            application/json:
+              example:
+                status: "Success"
+                data:
+                  skill_interest_id: 50
+                  industry_type_id: 10
+                  skill_name: "Conservation Biology"
+                  created_at: "2023-08-04T09:54:23.705Z"
+                  updated_at: "2023-08-04T09:54:23.705Z"
+                  _id: "64cccacf4a91d6035a2e20b5"
+  /addUserType:
+    post:
+      tags:
+        - Admin
+      servers:
+        - url: http://localhost:8003 
+      summary: Add User Type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_type_id:
+                  type: integer
+                  example: 5
+                user_type_name:
+                  type: string
+                  example: "Organization Employee"
+      responses:
+        '200':
+          description: User type added successfully.
+          content:
+            application/json:
+              example:
+                status: "Success"
+                data:
+                  user_type_id: 5
+                  user_type_name: "Organization Employee"
+                  created_at: "2023-08-04T09:56:16.922Z"
+                  updated_at: "2023-08-04T09:56:16.922Z"
+                  _id: "64cccb40999dc1523d815023"                
+  /addEducatorRole:
+    post:
+      tags:
+        - Admin
+      servers:
+        - url: http://localhost:8003 
+      summary: Add Educator Role
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                educator_role_type_id:
+                  type: integer
+                  example: 3
+                educator_role_type_name:
+                  type: string
+                  example: "Content Developer"
+                educator_role_type_description:
+                  type: string
+                  example: "Collaborates to craft engaging learning materials, designs interactive elements, and aligns content with learning objectives for effective education."
+      responses:
+        '200':
+          description: Educator role added successfully.
+          content:
+            application/json:
+              example:
+                status: "Success"
+                data:
+                  educator_role_type_id: 3
+                  educator_role_type_name: "Content Developer"
+                  educator_role_type_description: "Collaborates to craft engaging learning materials, designs interactive elements, and aligns content with learning objectives for effective education."
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              example:
+                status: "Fail"
+                data: "Server Error has occurred"
+  /gateway/home:
+    get:
+      tags:
+        - Authentication
+      servers:
+        - url: http://localhost:8000 
+      summary: Get Home Setup
+      responses:
+        '200':
+          description: The setup of the backend of Gateway Microservice is successful.
+          content:
+            application/json:
+              example:
+                message: "The Setup of backend of Gateway Microservice is successful."
+  /auth/signup:
+    post:
+      tags:
+        - Authentication
+      servers:
+        - url: http://localhost:8000 
+      summary: User Sign Up
+      description: Register a new user with the provided details.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  example: "Sanket"
+                last_name:
+                  type: string
+                  example: "Dhoktez"
+                email:
+                  type: string
+                  example: "sanket.dhokte2@iviewlabs.net"
+                password:
+                  type: string
+                  example: "12345"
+                confirm_password:
+                  type: string
+                  example: "12345"
+                phone_number:
+                  type: string
+                  example: "9087644331"
+                date_of_birth:
+                  type: string
+                  example: "12/06/2001"
+                profile_picture:
+                  type: string
+                  example: "/path"
+      responses:
+        '200':
+          description: User registered successfully.
+          content:
+            application/json:
+              example:
+                status: "Success"
+                data:
+                  message: "Resource created successfully."
+                  data:
+                    email: "sanket.dhokte2@iviewlabs.net"
+                    first_name: "Sanket"
+                    last_name: "Dhoktez"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                status: "Fail"
+                data: "Email or phone number already exists."
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              example:
+                status: "Fail"
+                data: "Server Error has occurred"
+  /auth/login:
+    post:
+      tags:
+        - Authentication
+      servers:
+        - url: http://localhost:8000 
+      summary: User Login
+      description: Authenticate and log in a user with provided credentials.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "sanket.dhokte@iviewlabs.net"
+                password:
+                  type: string
+                  example: "aa"
+      responses:
+        '200':
+          description: User logged in successfully.
+          content:
+            application/json:
+              example:
+                status: "Success"
+                data:
+                  accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+                  refreshToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                status: "Fail"
+                message: "Invalid credentials."
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              example:
+                status: "Fail"
+                message: "Server Error has occurred."
+  /auth/forgotPassword:
+    post:
+      tags:
+        - Authentication
+      servers:
+        - url: http://localhost:8000 
+      summary: Forgot Password
+      description: Request a password reset link for the provided email.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "sanket.dhokte@iviewlabs.net"
+      responses:
+        '200':
+          description: Password reset link sent successfully.
+          content:
+            application/json:
+              example:
+                status: "Success"
+                data:
+                  status: "Success"
+                  message: "The email is sent to you sanket.dhokte@iviewlabs.net"
+                  token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                status: "Fail"
+                message: "Email not found."
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              example:
+                status: "Fail"
+                message: "Server Error has occurred."
+  /auth/resetPassword:
+    post:
+      tags:
+        - Authentication
+      servers:
+        - url: http://localhost:8000 
+      summary: Reset Password
+      description: Reset user's password using the provided token.
+      parameters:
+        - name: user_id
+          in: query
+          required: true
+          schema:
+            type: string
+          example: "64ca296d6c045aafde82df3c"
+        - name: token
+          in: query
+          required: true
+          schema:
+            type: string
+          example: "your-token-here"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  example: "aa"
+                confirm_password:
+                  type: string
+                  example: "aa"
+      responses:
+        '200':
+          description: Password reset successfully.
+          content:
+            application/json:
+              example:
+                status: "Success"
+                data:
+                  user_id: "64ca296d6c045aafde82df3c"
+                  newPassword: "$2b$10$xdTSeITwWDK.Eg5kehV27.FnIgh0q7g5HS6tXVNfiTgfz6WAB4Ure"
+                  data:
+                    acknowledged: true
+                    modifiedCount: 1
+                    upsertedId: null
+                    upsertedCount: 0
+                    matchedCount: 1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                status: "Failed"
+                message: "The token is invalid or expired"
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              example:
+                status: "Fail"
+                message: "Server Error has occurred."
+  /auth/basicQuestion:
+    post:
+      tags:
+        - Authentication
+      servers:
+        - url: http://localhost:8000 
+      summary: Basic Question
+      description: Answer basic questions related to career goal and skill interests.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                career_goal_id:
+                  type: integer
+                  example: 3
+                skill_interests:
+                  type: array
+                  items:
+                    type: integer
+                  example: [1, 1, 2]
+      responses:
+        '200':
+          description: Basic questions answered successfully.
+          content:
+            application/json:
+              example:
+                status: "Success"
+                data:
+                  user_id: "64ca296d6c045aafde82df3c"
+                  first_name: "Sanket"
+                  email: "sanket.dhokte@iviewlabs.net"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                status: "Failed"
+                error: "Authentication failed: Invalid or expired token"
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              example:
+                status: "Fail"
+                message: "Server Error has occurred."
+  /auth/refreshToken:
+    post:
+      tags:
+        - Authentication
+      servers:
+        - url: http://localhost:8000 
+      summary: Refresh Access Token
+      description: Refresh the user's access token.
+      parameters:
+        - name: user_id
+          in: query
+          required: true
+          schema:
+            type: string
+          example: "64ca296d6c045aafde82df3c"
+      responses:
+        '200':
+          description: Access token refreshed successfully.
+          content:
+            application/json:
+              example:
+                status: "Success"
+                data:
+                  status: "Success"
+                  token: "your-refreshed-token-here"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                status: "Failed"
+                error: "Authentication failed: user_id doesn't exist"
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              example:
+                status: "Fail"
+                message: "A server error occurred while processing the request."
+  /auth/getSkills:
+    get:
+      tags:
+        - Authentication
+      servers:
+        - url: http://localhost:8000 
+      summary: Get Skills
+      description: Retrieve skills based on optional parameters.
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+          example: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          example: 10
+        - name: industry_id
+          in: query
+          schema:
+            type: integer
+            example: 3
+      responses:
+        '200':
+          description: Skills retrieved successfully.
+          content:
+            application/json:
+              example:
+                status: "Success"
+                data:
+                  - skill_interest_id: 11
+                    industry_type_id: 3
+                    skill_name: "Accounting"
+                  - skill_interest_id: 12
+                    industry_type_id: 3
+                    skill_name: "Investment Banking"
+                  - skill_interest_id: 13
+                    industry_type_id: 3
+                    skill_name: "Financial Analysis"
+                page_number: 1
+                total_documents: 50
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                status: "Failed"
+                error: "Authentication failed: Token missing"
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              example:
+                status: "Fail"
+                message: "A server error occurred while processing the request."
+  /auth/getAllIndustry:
+    get:
+      tags:
+        - Authentication
+      servers:
+        - url: http://localhost:8000 
+      summary: Get All Industries
+      description: Retrieve a list of all industries with optional pagination.
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+          example: 2
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          example: 5
+      responses:
+        '200':
+          description: List of industries retrieved successfully.
+          content:
+            application/json:
+              example:
+                status: "Success"
+                data:
+                  - industry_type_id: 6
+                    industry_type_name: "Engineering"
+                  - industry_type_id: 7
+                    industry_type_name: "Marketing and Advertising"
+                  - industry_type_id: 8
+                    industry_type_name: "Art and Design"
+                  - industry_type_id: 9
+                    industry_type_name: "Manufacturing"
+                  - industry_type_id: 10
+                    industry_type_name: "Environmental and Sustainability"
+                page_number: 2
+                total_documents: 10
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                status: "Failed"
+                error: "Authentication failed: Token missing"
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              example:
+                status: "Fail"
+                message: "A server error occurred while processing the request."
+  /educator/addCourseRole:
+    post:
+      tags:
+          - Educator-Course
+      summary: Add a course role
+      description: Endpoint to add a course role for an educator.
+      requestBody:
+        description: Request body for adding a course role.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: sanket.dhokte@iviewlabs.net
+                course_role_id:
+                  type: integer
+                  example: 2
+                course_id:
+                  type: string
+                  example: 64d47ba476e1ddd13c9d4958
+      responses:
+        '200':
+          description: Course role added successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Course role added successfully.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /educator/removeCourseRole:
+    post:
+      summary: Remove a course role
+      description: Endpoint to remove a course role from an educator.
+      tags:
+        - Educator-Course
+      requestBody:
+        description: Request body for removing a course role.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  example: 64ca296d6c045aafde82df3c
+                course_role_id:
+                  type: integer
+                  example: 2
+                course_id:
+                  type: string
+                  example: 64d47ba476e1ddd13c9d4958
+      responses:
+        '200':
+          description: Course role removed successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Course role removed successfully.
+        '400':
+          description: Bad Request - Invalid token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: Invalid token.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /educator/addDescription:
+    post:
+      summary: Add course description
+      description: Endpoint to add a description for a course.
+      tags:
+        - Educator-Course
+      requestBody:
+        description: Request body for adding course description.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                course_id:
+                  type: string
+                  example: 64d47ba476e1ddd13c9d4958
+                course_requirements:
+                  type: string
+                  example: This is course requirements
+                course_taget_audience:
+                  type: string
+                  example: This is course target audience
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Course description added successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      course_id:
+                        type: string
+                        example: 64d47ba476e1ddd13c9d4958
+                      course_requirements:
+                        type: string
+                        example: This is course requirements
+                      course_taget_audience:
+                        type: string
+                        example: This is course target audience
+                      _id:
+                        type: string
+                        example: 64e47216c35761678a2354b5
+                      course_description_id:
+                        type: string
+                        example: 64e47216c35761678a2354b5
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: "2023-08-22T08:30:14.063Z"
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: "2023-08-22T08:30:14.064Z"
+                      __v:
+                        type: integer
+                        example: 0
+        '400':
+          description: Bad Request - Invalid token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: Invalid token.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /educator/getDescription:
+    get:
+      summary: Get course description
+      description: Endpoint to get the description for a course.
+      tags:
+        - Educator-Course
+      parameters:
+        - name: course_id
+          in: query
+          description: ID of the course to retrieve description for.
+          required: true
+          schema:
+            type: string
+            example: 64d47ba476e1ddd13c9d4958
+      responses:
+        '200':
+          description: Course description retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      course_id:
+                        type: string
+                        example: 64d47ba476e1ddd13c9d4958
+                      course_requirements:
+                        type: string
+                        example: This is course requirements
+                      course_taget_audience:
+                        type: string
+                        example: This is course target audience
+                      full_course_description:
+                        type: string
+                        example: ABBSSS
+        '400':
+            description: Bad Request - Invalid course ID.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      example: Error
+                    message:
+                      type: string
+                      example: Invalid course ID.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /educator/updateDescription:
+    put:
+      summary: Update course description
+      description: Endpoint to update the description for a course.
+      tags:
+        - Educator-Course
+      requestBody:
+        description: Request body for updating course description.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                course_id:
+                  type: string
+                  example: 64d47ba476e1ddd13c9d4958
+                course_requirements:
+                  type: string
+                  example: This is course requirements (Updated -12)
+                course_taget_audience:
+                  type: string
+                  example: This is course target audience
+                full_course_description:
+                  type: string
+                  example: Updated Full description
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Course description updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                        example: 64e477d2105ee556da21f445
+                      course_id:
+                        type: string
+                        example: 64d47ba476e1ddd13c9d4958
+                      __v:
+                        type: integer
+                        example: 0
+                      course_requirements:
+                        type: string
+                        example: This is course requirements (Updated -12)
+                      course_taget_audience:
+                        type: string
+                        example: This is course target audience
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: "2023-08-22T08:54:42.734Z"
+                      full_course_description:
+                        type: string
+                        example: ABBSSS
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: "2023-08-22T09:09:17.754Z"
+        '400':
+          description: Bad Request - Invalid course ID.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: Invalid course ID.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /educator/addModule:
+    post:
+      summary: Add module to course
+      description: Endpoint to add a module to a course.
+      tags:
+        - Educator-Course
+      requestBody:
+        description: Request body for adding a module.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                course_id:
+                  type: string
+                  example: 64d47ba476e1ddd13c9d4958
+                module_number:
+                  type: integer
+                  example: 5
+                module_title:
+                  type: string
+                  example: Module Name 5
+                module_description:
+                  type: string
+                  example: This is the sample description of Module Name 5
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Module added successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      course_id:
+                        type: string
+                        example: 64d47ba476e1ddd13c9d4958
+                      module_number:
+                        type: integer
+                        example: 5
+                      module_title:
+                        type: string
+                        example: Module Name 5
+                      module_description:
+                        type: string
+                        example: This is the sample description of Module Name 5
+                      _id:
+                        type: string
+                        example: 64e47d3ed9ad64d54810c4e9
+                      course_module_id:
+                        type: string
+                        example: 64e47d3ed9ad64d54810c4e9
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: "2023-08-22T09:17:50.513Z"
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: "2023-08-22T09:17:50.513Z"
+                      __v:
+                        type: integer
+                        example: 0
+        '400':
+          description: Bad Request - Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Fail
+                  message:
+                    type: string
+                    example: Unauthorized.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /educator/getAllModule:
+    get:
+      summary: Get all modules for a course
+      description: Endpoint to retrieve all modules for a course.
+      tags:
+        - Educator-Course
+      parameters:
+        - name: course_id
+          in: query
+          description: ID of the course to retrieve modules for.
+          required: true
+          schema:
+            type: string
+            example: 64d47ba476e1ddd13c9d4958
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Modules retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        course_id:
+                          type: string
+                          example: 64d47ba476e1ddd13c9d4958
+                        module_number:
+                          type: integer
+                          example: 1
+                        module_title:
+                          type: string
+                          example: Module Name 1
+                        module_description:
+                          type: string
+                          example: This is the sample description of Module Name 1
+                        course_module_id:
+                          type: string
+                          example: 64d4c34487a5f45966b854c3
+        '400':
+          description: Bad Request - Invalid course ID or Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: Invalid course ID or Unauthorized.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /educator/editModule:
+    put:
+      summary: Edit module details
+      description: Endpoint to edit the details of a module.
+      tags:
+        - Educator-Course
+      requestBody:
+        description: Request body for editing module details.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                course_id:
+                  type: string
+                  example: 64d47ba476e1ddd13c9d4958
+                course_module_id:
+                  type: string
+                  example: 64d4c34487a5f45966b854c3
+                module_title:
+                  type: string
+                  example: Module Name 5
+                module_description:
+                  type: string
+                  example: This is the updated sample description of Module Name 5
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Module details updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Resource updated successfully.
+        '400':
+          description: Bad Request - Invalid course ID, course module ID, or Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: Invalid course ID, course module ID, or Unauthorized.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /educator/deleteModule:
+    post:
+      summary: Delete a module
+      description: Endpoint to delete a module from a course.
+      tags:
+        - Educator-Course
+      requestBody:
+        description: Request body for deleting a module.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                course_id:
+                  type: string
+                  example: 64d47ba476e1ddd13c9d4958
+                module_number:
+                  type: integer
+                  example: 1
+                course_module_id:
+                  type: string
+                  example: 64d4c34487a5f45966b854c3
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Module deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Resource deleted successfully.
+        '400':
+          description: Bad Request - Invalid course ID, module number, course module ID, or Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: Invalid course ID, module number, course module ID, or Unauthorized.
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /educator/addChapter:
+    post:
+      summary: Example form data endpoint
+      tags:
+        - Educator-Course
+      requestBody:
+        content:
+          multipart/form-data::
+            schema:
+              type: object
+              properties:
+                course_id:
+                  type: string
+                chapter_number:
+                  type: number
+                course_module_id:
+                  type: string
+                chapter_title:
+                  type: string
+                chapter_description:
+                  type: string
+                chapter_resources:
+                  type: string
+                chapter_video:
+                  type: string
+                  format: binary
+                preview_chapter:
+                  type: boolean
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      chapter_number:
+                        type: number
+                        example: 3
+                      course_module_id:
+                        type: string
+                        example: 64d4c34487a5f45966b854c3
+                      chapter_title:
+                        type: string
+                        example: How react works? 3
+                      chapter_description:
+                        type: string
+                        example: This is the description of "How react works?" 3
+                      chapter_resources:
+                        type: string
+                        example: https://reactjs.org/
+                      video_path:
+                        type: string
+                        example: ks.mp4
+                      video_duration:
+                        type: string
+                        example: 5.92
+                      preview_chapter:
+                        type: boolean
+                        example: false
+                      _id:
+                        type: string
+                        example: 64e489049daa4076eb9b2c47
+                      chapter_subtitle:
+                        type: array
+                        items:
+                          type: string
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: "2023-08-22T10:08:04.170Z"
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: "2023-08-22T10:08:04.171Z"
+                      module_chapter_id:
+                        type: string
+                        example: 64e489049daa4076eb9b2c47
+                      __v:
+                        type: integer
+                        example: 0
+        '400':
+          description: Bad Request - Unauthorized or Invalid data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: Unauthorized or Invalid data.
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /educator/updateChapter:
+    put:
+      summary: Update a chapter
+      description: Endpoint to update the details of a chapter.
+      tags:
+        - Educator-Course
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                course_id:
+                  type: string
+                chapter_number:
+                  type: number
+                course_module_id:
+                  type: string
+                chapter_title:
+                  type: string
+                chapter_description:
+                  type: string
+                chapter_resources:
+                  type: string
+                chapter_video:
+                  type: string
+                  format: binary
+                preview_chapter:
+                  type: boolean
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Chapter updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Resource Updated Successfully
+        '400':
+          description: Bad Request - Unauthorized or Invalid data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: Unauthorized or Invalid data.
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /educator/deleteChapter:
+    post:
+      summary: Delete a chapter
+      description: Endpoint to delete a chapter from a course module.
+      tags:
+        - Educator-Course
+      requestBody:
+        description: Request body for deleting a chapter.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                course_id:
+                  type: string
+                course_module_id:
+                  type: string
+                chapter_number:
+                  type: number
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Chapter deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Resource deleted successfully.
+        '400':
+          description: Bad Request - Unauthorized or Invalid data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: Unauthorized or Invalid data.
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred
+  /educator/getAllChapters:
+    get:
+      summary: Get chapters by course module ID
+      description: Endpoint to retrieve chapters by course module ID.
+      tags:
+        - Educator-Course
+      parameters:
+        - name: course_module_id
+          in: query
+          description: ID of the course module.
+          required: true
+          schema:
+            type: string
+            example: "64e48ca8e6d9607cb94615d2"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        chapter_number:
+                          type: number
+                          example: 2
+                        chapter_title:
+                          type: string
+                          example: How react works? 3
+                        chapter_description:
+                          type: string
+                          example: This is the description of "How react works?" 3
+                        video_duration:
+                          type: string
+                          example: 5.92
+                        module_chapter_id:
+                          type: string
+                          example: "64e48cb5e6d9607cb94615d5"
+        '400':
+          description: Bad Request - Unauthorized or Invalid data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: Unauthorized or Invalid data.
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /educator/addSubtitle:
+    post:
+      summary: Add a subtitle
+      description: Endpoint to add a subtitle for a module chapter.
+      tags:
+        - Educator-Course
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                subtitle_id:
+                  type: string
+                subtitle_file:
+                  type: string
+                  format: binary
+                course_id:
+                  type: string
+                module_chapter_id:
+                  type: string
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Resource created successfully.
+        '400':
+          description: Bad Request - Unauthorized or Invalid data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: Unauthorized or Invalid data.
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /educator/deleteSubtitle:
+    post:
+      summary: Delete a subtitle
+      description: Endpoint to delete a subtitle from a module chapter.
+      tags:
+        - Educator-Course
+      requestBody:
+        description: Request body for deleting a subtitle.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                module_chapter_id:
+                  type: string
+                chapter_subtitle_id:
+                  type: string
+                course_id:
+                  type: string
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Resource deleted successfully.
+        '400':
+          description: Bad Request - Unauthorized or Invalid data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: Unauthorized or Invalid data.
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /learner/getCourseByIndustry:
+    get:
+      summary: Get courses by industry
+      description: Endpoint to retrieve courses based on industry ID.
+      tags:
+        - Learner
+      parameters:
+        - name: industryID
+          in: query
+          description: ID of the industry.
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - name: page
+          in: query
+          description: Page number.
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - name: limit
+          in: query
+          description: Number of documents per page.
+          required: true
+          schema:
+            type: integer
+            example: 3
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        course_title:
+                          type: string
+                          example: Test Title 101
+                        course_skill_id:
+                          type: integer
+                          example: 2
+                        course_admin_id_list:
+                          type: array
+                          items:
+                            type: string
+                            example: "64d0bb49ce6db7db10e60d12"
+                        course_thumbnail_path:
+                          type: string
+                          example: "public\\assets\\CourseThumbnail\\course_thumbnail-1691646883823-21595537.jpg"
+                        course_id:
+                          type: string
+                          example: "64d47ba476e1ddd13c9d4958"
+                  page_number:
+                    type: integer
+                    example: 1
+                  total_documents:
+                    type: integer
+                    example: 1
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /learner/getCourseBySkill:
+    get:
+      summary: Get courses by skill
+      description: Endpoint to retrieve courses based on skill ID.
+      tags:
+        - Learner
+      parameters:
+        - name: skillID
+          in: query
+          description: ID of the skill.
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - name: page
+          in: query
+          description: Page number.
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - name: limit
+          in: query
+          description: Number of documents per page.
+          required: true
+          schema:
+            type: integer
+            example: 3
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        course_title:
+                          type: string
+                          example: Test Title 101
+                        course_skill_id:
+                          type: integer
+                          example: 2
+                        course_admin_id_list:
+                          type: array
+                          items:
+                            type: string
+                            example: "64d0bb49ce6db7db10e60d12"
+                        course_thumbnail_path:
+                          type: string
+                          example: "public\\assets\\CourseThumbnail\\course_thumbnail-1691646883823-21595537.jpg"
+                        course_id:
+                          type: string
+                          example: "64d47ba476e1ddd13c9d4958"
+                  page_number:
+                    type: integer
+                    example: 1
+                  total_documents:
+                    type: integer
+                    example: 1
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.    
+  /learner/getFullCourseData:
+    get:
+      summary: Get full course data
+      description: Endpoint to retrieve full course data based on course ID.
+      tags:
+        - Learner
+      parameters:
+        - name: course_id
+          in: query
+          description: ID of the course.
+          required: true
+          schema:
+            type: string
+            example: 64d47ba476e1ddd13c9d4958
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      courseBasics:
+                        type: object
+                        properties:
+                          course_title:
+                            type: string
+                            example: Test Title 101
+                          course_short_description:
+                            type: string
+                            example: Description of Test Title 101
+                          instructor_user_id_list:
+                            type: array
+                            items:
+                              type: string
+                          course_skill_id:
+                            type: integer
+                            example: 2
+                          course_industry_type_id:
+                            type: integer
+                            example: 1
+                          course_thumbnail_path:
+                            type: string
+                            example: "public\\assets\\CourseThumbnail\\course_thumbnail-1691646883823-21595537.jpg"
+                          course_id:
+                            type: string
+                            example: "64d47ba476e1ddd13c9d4958"
+                      courseModules:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            course_id:
+                              type: string
+                              example: "64d47ba476e1ddd13c9d4958"
+                            module_number:
+                              type: integer
+                              example: 1
+                            module_title:
+                              type: string
+                              example: "Module Name 3"
+                            module_description:
+                              type: string
+                              example: "This is the sample description of Module Name 3"
+                            course_module_id:
+                              type: string
+                              example: "64d4c35987a5f45966b854c9"
+                  page_number:
+                    type: integer
+                    example: 1
+                  total_documents:
+                    type: integer
+                    example: 1
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /learner/getChapterDataByModule:
+    get:
+      summary: Get chapter data by module
+      description: Endpoint to retrieve chapter data based on course module ID.
+      tags:
+        - Learner
+      parameters:
+        - name: course_module_id
+          in: query
+          description: ID of the course module.
+          required: true
+          schema:
+            type: string
+            example: 64d4c34487a5f45966b854c3
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                        example: Success
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            chapter_number:
+                              type: integer
+                              example: 2
+                            course_module_id:
+                              type: string
+                              example: "64d4c34487a5f45966b854c3"
+                            chapter_title:
+                              type: string
+                              example: "How react works? 3"
+                            chapter_description:
+                              type: string
+                              example: "This is the description of \"How react works?\" 3"
+                            preview_chapter:
+                              type: boolean
+                              example: false
+                  page_number:
+                    type: integer
+                    example: 1
+                  total_documents:
+                    type: integer
+                    example: 1
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /learner/getFullChapterData:
+    get:
+      summary: Get full chapter data
+      description: Endpoint to retrieve full chapter data based on course ID and module chapter ID.
+      tags:
+        - Learner
+      parameters:
+        - name: course_id
+          in: query
+          description: ID of the course.
+          required: true
+          schema:
+            type: string
+            example: 64d47ba476e1ddd13c9d4958
+        - name: module_chapter_id
+          in: query
+          description: ID of the module chapter.
+          required: true
+          schema:
+            type: string
+            example: 64e48cb5e6d9607cb94615d5
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          example: "64e48cb5e6d9607cb94615d5"
+                        chapter_number:
+                          type: integer
+                          example: 2
+                        course_module_id:
+                          type: string
+                          example: "64e48ca8e6d9607cb94615d2"
+                        chapter_title:
+                          type: string
+                          example: "How react works? 3"
+                        chapter_description:
+                          type: string
+                          example: "This is the description of \"How react works?\" 3"
+                        chapter_resources:
+                          type: string
+                          example: "Link 1 : https://reactjs.org/"
+                        video_path:
+                          type: string
+                          example: "public\\assets\\video\\chapter_video-1692699829264-45191524.mp4"
+                        video_duration:
+                          type: string
+                          example: "5.92"
+                        preview_chapter:
+                          type: boolean
+                          example: false
+                        chapter_subtitle:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              subtitle_id:
+                                type: integer
+                                example: 5
+                              subtitle_path:
+                                type: string
+                                example: "public\\assets\\subtitle\\subtitle_file-1692701078760-457965821.txt"
+                              chapter_subtitle_id:
+                                type: string
+                                example: "64e491964f93c03fb2fa8267"
+                        created_at:
+                          type: string
+                          example: "2023-08-22T10:23:49.465Z"
+                        updated_at:
+                          type: string
+                          example: "2023-08-22T10:44:38.987Z"
+                        module_chapter_id:
+                          type: string
+                          example: "64e48cb5e6d9607cb94615d5"
+                  page_number:
+                    type: integer
+                    example: 1
+                  total_documents:
+                    type: integer
+                    example: 1
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /learner/editReview:
+    put:
+      summary: Edit review
+      description: Endpoint to edit a review by providing the updated review details.
+      tags:
+        - Learner
+      parameters:
+        - name: course_id
+          in: query
+          description: ID of the course.
+          required: true
+          schema:
+            type: string
+            example: 64d47ba476e1ddd13c9d4958
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                review_description:
+                  type: string
+                  example: "string 2"
+                course_rating:
+                  type: integer
+                  example: 3
+                course_review_id:
+                  type: string
+                  example: "64d62cb6ff775d334cdce0dc"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Resource updated successfully.
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: Bad  Invalid input provided.
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /learner/addReview:
+    post:
+      summary: Add review
+      description: Endpoint to add a review for a course.
+      tags:
+        - Learner
+      parameters:
+        - name: course_id
+          in: query
+          description: ID of the course.
+          required: true
+          schema:
+            type: string
+            example: 64d47ba476e1ddd13c9d4958
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                review_description:
+                  type: string
+                  example: "string"
+                course_rating:
+                  type: integer
+                  example: 2
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Resource created successfully.
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: Bad Invalid input provided.
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /learner/deleteReview:
+    delete:
+      summary: Delete review
+      description: Endpoint to delete a review for a course.
+      tags:
+        - Learner
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: course_id
+          in: query
+          description: ID of the course.
+          required: true
+          schema:
+            type: string
+            example: 64d47ba476e1ddd13c9d4958
+        - name: course_review_id
+          in: query
+          description: ID of the course.
+          required: true
+          schema:
+            type: string
+            example: 64d47ba476e1ddd13c9d4958    
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Resource deleted successfully.
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: Bad Invalid input provided.
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /learner/getReview:
+    get:
+      summary: Get review details
+      description: Retrieve review details for a specific course review.
+      tags:
+        - Learner
+      parameters:
+        - name: course_review_id
+          in: query
+          description: ID of the course review.
+          required: true
+          schema:
+            type: string
+            example: 64e4a8f89bb846204de8dd34
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      userData:
+                        type: object
+                        properties:
+                          first_name:
+                            type: string
+                            example: Tanish
+                          last_name:
+                            type: string
+                            example: Kamboj
+                          email:
+                            type: string
+                            example: tanishkamboj@iviewlabs.net
+                          phone_number:
+                            type: integer
+                            example: 9087644332
+                          profile_picture_path:
+                            type: string
+                            example: "public\\assets\\profile_picture-1691401033134-306149025.png"
+                          user_id:
+                            type: string
+                            example: 64d0bb49ce6db7db10e60d12
+                      reviewData:
+                        type: object
+                        properties:
+                          course_id:
+                            type: string
+                            example: 64d47ba476e1ddd13c9d4958
+                          reviewer_user_id:
+                            type: string
+                            example: 64d0bb49ce6db7db10e60d12
+                          review_description:
+                            type: string
+                            example: "string"
+                          course_rating:
+                            type: integer
+                            example: 2
+                          created_at:
+                            type: string
+                            example: "2023-08-22T12:24:24.514Z"
+                          updated_at:
+                            type: string
+                            example: "2023-08-22T12:24:24.514Z"
+                          course_review_id:
+                            type: string
+                            example: 64e4a8f89bb846204de8dd34
+                          featured_review:
+                            type: boolean
+                            example: false
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: An internal server error occurred.
+  /learner/addQuestion:
+    post:
+      summary: Add a question
+      description: Add a new question for a course chapter.
+      tags:
+        - Learner
+      parameters:
+        - in: query
+          name: course_id
+          required: true
+          schema:
+            type: string
+          description: ID of the course.
+          example: 64d47ba476e1ddd13c9d4958
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                course_chapter_id:
+                  type: string
+                  description: ID of the course chapter.
+                  example: 64d4c3ba87a5f45966b854d2
+                question_title:
+                  type: string
+                  description: Title of the question.
+                  example: "Question 4"
+                question_description:
+                  type: string
+                  description: Description of the question.
+                  example: "This is a sample question"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      course_id:
+                        type: string
+                        example: "64d47ba476e1ddd13c9d4958"
+                      course_chapter_id:
+                        type: string
+                        example: "64d4c3ba87a5f45966b854d2"
+                      question_title:
+                        type: string
+                        example: "Question 4"
+                      question_description:
+                        type: string
+                        example: "This is a sample question"
+                      questionnaire_user_id:
+                        type: string
+                        example: "64d0bb49ce6db7db10e60d12"
+                      _id:
+                        type: string
+                        example: "64e6df32074c065a0f531916"
+                      question_id:
+                        type: string
+                        example: "64e6df32074c065a0f531916"
+                      created_at:
+                        type: string
+                        example: "2023-08-24T04:40:18.597Z"
+                      updated_at:
+                        type: string
+                        example: "2023-08-24T04:40:18.598Z"
+                      __v:
+                        type: integer
+                        example: 0
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "Invalid request. Please provide all required fields."
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An internal server error occurred."
+  /learner/editQuestion:
+    put:
+      summary: Edit a question
+      description: Edit an existing question for a course chapter.
+      tags:
+        - Learner
+      parameters:
+        - in: query
+          name: course_id
+          required: true
+          schema:
+            type: string
+          description: ID of the course.
+          example: 64d47ba476e1ddd13c9d4958
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question_id:
+                  type: string
+                  description: ID of the question to be edited.
+                  example: "64e6df32074c065a0f531916"
+                question_title:
+                  type: string
+                  description: New title of the question.
+                  example: "Question 1"
+                question_description:
+                  type: string
+                  description: New description of the question.
+                  example: "This is a sample question (updated)"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Resource updated successfully."
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "Invalid request. Please provide all required fields."
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An internal server error occurred."
+  /learner/addAnswer:
+    post:
+      summary: Add an answer
+      description: Add a new answer for a specific question.
+      tags:
+        - Learner
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question_id:
+                  type: string
+                  description: ID of the question to which the answer belongs.
+                  example: "64e6df32074c065a0f531916"
+                answer_title:
+                  type: string
+                  description: Title of the answer.
+                  example: "This is answer 19"
+                answer_description:
+                  type: string
+                  description: Description of the answer.
+                  example: "This is the description of answer 19"
+                course_id:
+                  type: string
+                  description: ID of the course to which the answer belongs.
+                  example: "64d47ba476e1ddd13c9d4958"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Resource created successfully."
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "Invalid request. Please provide all required fields."
+        '500':
+            description: Internal Server Error
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      example: Error
+                    message:
+                      type: string
+                      example: "An error occurred while processing the request."
+  /learner/editAnswer:
+    put:
+      summary: Edit an answer
+      description: Edit an existing answer for a specific question.
+      tags:
+        - Learner
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                answer_id:
+                  type: string
+                  description: ID of the answer to be edited.
+                  example: "64dc4846cd1935e1c790404d"
+                answer_title:
+                  type: string
+                  description: New title for the answer.
+                  example: "This is answer 1"
+                answer_description:
+                  type: string
+                  description: New description for the answer.
+                  example: "This is the description of answer 1 (updated)"
+                course_id:
+                  type: string
+                  description: ID of the course to which the answer belongs.
+                  example: "64d47ba476e1ddd13c9d4958"
+                question_id:
+                  type: string
+                  description: ID of the question to which the answer belongs.
+                  example: "64da1031d830589b77809950"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Resource updated successfully."
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "Invalid request. Please provide all required fields."
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request."
+  /learner/getAllQuestions:
+    get:
+      summary: Get all questions for a specific course chapter
+      description: Retrieve a list of questions for a specific course chapter.
+      tags:
+        - Learner
+      parameters:
+        - name: course_chapter_id
+          in: query
+          required: true
+          schema:
+            type: string
+            example: 64d4c3ba87a5f45966b854d2
+            description: ID of the course chapter for which questions are to be retrieved.
+        - name: page_no
+          in: query
+          required: true
+          schema:
+            type: integer
+            example: 1
+            description: Page number of the results.
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: integer
+            example: 4
+          description: Number of items per page .
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        question_title:
+                          type: string
+                          example: "Question 1"
+                        question_description:
+                          type: string
+                          example: "This is a sample question (updated)"
+                        questionnaire_user_id:
+                          type: string
+                          example: "64d0bb49ce6db7db10e60d12"
+                        question_id:
+                          type: string
+                          example: "64da1031d830589b77809950"
+                        created_at:
+                          type: string
+                          format: date-time
+                          example: "2023-08-14T11:29:53.705Z"
+                        updated_at:
+                          type: string
+                          format: date-time
+                          example: "2023-08-14T11:40:43.429Z"
+                    description: List of questions for the specified course chapter.
+                  page_number:
+                    type: integer
+                    example: 1
+                  total_documents:
+                    type: integer
+                    example: 5
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Fail
+                  message:
+                    type: string
+  /learner/getFullQuestion:
+    get:
+      summary: Get full details of a specific question
+      description: Retrieve detailed information about a specific question, including user data and associated answers.
+      tags:
+        - Learner
+      parameters:
+        - name: question_id
+          in: query
+          required: true
+          schema:
+            type: string
+            example: 64da1031d830589b77809950
+          description: ID of the question for which details are to be retrieved.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      questionData:
+                        type: object
+                        properties:
+                          course_id:
+                            type: string
+                            example: "64d47ba476e1ddd13c9d4958"
+                          course_chapter_id:
+                            type: string
+                            example: "64d4c3ba87a5f45966b854d2"
+                          question_title:
+                            type: string
+                            example: "Question 1"
+                          question_description:
+                            type: string
+                            example: "This is a sample question (updated)"
+                          questionnaire_user_id:
+                            type: string
+                            example: "64d0bb49ce6db7db10e60d12"
+                          question_id:
+                            type: string
+                            example: "64da1031d830589b77809950"
+                          created_at:
+                            type: string
+                            format: date-time
+                            example: "2023-08-14T11:29:53.705Z"
+                          updated_at:
+                            type: string
+                            format: date-time
+                            example: "2023-08-14T11:40:43.429Z"
+                      userData:
+                        type: object
+                        properties:
+                          first_name:
+                            type: string
+                            example: "Tanish"
+                          last_name:
+                            type: string
+                            example: "Kamboj"
+                          email:
+                            type: string
+                            example: "tanishkamboj@iviewlabs.net"
+                          phone_number:
+                            type: integer
+                            example: 9087644332
+                          profile_picture_path:
+                            type: string
+                            example: "public\\assets\\profile_picture-1691401033134-306149025.png"
+                          user_id:
+                            type: string
+                            example: "64d0bb49ce6db7db10e60d12"
+                      answerData:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            answer_title:
+                              type: string
+                              example: "This is answer 1"
+                            answerer_user_id:
+                              type: string
+                              example: "64d0bb49ce6db7db10e60d12"
+                            answer_id:
+                              type: string
+                              example: "64dc4846cd1935e1c790404d"
+                            first_name:
+                              type: string
+                              example: "Tanish"
+                            last_name:
+                              type: string
+                              example: "Kamboj"
+                            profile_picture_path:
+                              type: string
+                              example: "public\\assets\\profile_picture-1691401033134-306149025.png"
+                    description: Detailed information about the question, associated user data, and answers.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request."
+  /learner/getAllAnswer:
+    get:
+      summary: Get all answers for a specific question
+      description: Retrieve all answers for a specific question, including user data for each answer.
+      tags:
+        - Learner
+      parameters:
+        - name: question_id
+          in: query
+          required: true
+          schema:
+            type: string
+            example: 64da1031d830589b77809950
+          description: ID of the question for which answers are to be retrieved.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        answer_title:
+                          type: string
+                          example: "This is answer 1"
+                        answerer_user_id:
+                          type: string
+                          example: "64d0bb49ce6db7db10e60d12"
+                        answer_id:
+                          type: string
+                          example: "64dc4846cd1935e1c790404d"
+                        first_name:
+                          type: string
+                          example: "Tanish"
+                        last_name:
+                          type: string
+                          example: "Kamboj"
+                        profile_picture_path:
+                          type: string
+                          example: "public\\assets\\profile_picture-1691401033134-306149025.png"
+                    description: List of answers for the specified question, along with user data for each answer.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request."
+  /learner/getFullAnswer:
+    get:
+      summary: Get full details of a specific answer
+      description: Retrieve detailed information about a specific answer, including user data and associated question data.
+      tags:
+        - Learner
+      parameters:
+        - name: answer_id
+          in: query
+          required: true
+          schema:
+            type: string
+            example: 64dc4846cd1935e1c790404d
+          description: ID of the answer for which details are to be retrieved.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      userData:
+                        type: object
+                        properties:
+                          first_name:
+                            type: string
+                            example: "Tanish"
+                          last_name:
+                            type: string
+                            example: "Kamboj"
+                          email:
+                            type: string
+                            example: "tanishkamboj@iviewlabs.net"
+                          phone_number:
+                            type: integer
+                            example: 9087644332
+                          profile_picture_path:
+                            type: string
+                            example: "public\\assets\\profile_picture-1691401033134-306149025.png"
+                          user_id:
+                            type: string
+                            example: "64d0bb49ce6db7db10e60d12"
+                      answerData:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                            example: "64dc4846cd1935e1c790404d"
+                          question_id:
+                            type: string
+                            example: "64da1031d830589b77809950"
+                          course_id:
+                            type: string
+                            example: "64d47ba476e1ddd13c9d4958"
+                          answer_title:
+                            type: string
+                            example: "This is answer 1"
+                          answer_description:
+                            type: string
+                            example: "This is the description of answer 1 (updated)"
+                          answerer_user_id:
+                            type: string
+                            example: "64d0bb49ce6db7db10e60d12"
+                          created_at:
+                            type: string
+                            format: date-time
+                            example: "2023-08-16T03:53:42.448Z"
+                          updated_at:
+                            type: string
+                            format: date-time
+                            example: "2023-08-16T03:53:42.449Z"
+                      questionData:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                            example: "64da1031d830589b77809950"
+                          course_id:
+                            type: string
+                            example: "64d47ba476e1ddd13c9d4958"
+                          course_chapter_id:
+                            type: string
+                            example: "64d4c3ba87a5f45966b854d2"
+                          question_title:
+                            type: string
+                            example: "Question 1"
+                          question_description:
+                            type: string
+                            example: "This is a sample question (updated)"
+                          questionnaire_user_id:
+                            type: string
+                            example: "64d0bb49ce6db7db10e60d12"
+                          created_at:
+                            type: string
+                            format: date-time
+                            example: "2023-08-14T11:29:53.705Z"
+                          updated_at:
+                            type: string
+                            format: date-time
+                            example: "2023-08-14T11:40:43.429Z"
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request."
+  /learner/createArticle:
+    post:
+      summary: Create a new article
+      description: Create a new article with provided information and media file.
+      tags:
+        - Learner - article
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                article_title:
+                  type: string
+                  example: "Title-3"
+                article_description:
+                  type: string
+                  example: "Description"
+                article_tag_list:
+                  type: array
+                  items:
+                    type: integer
+                    example: 7
+                article_skill_list:
+                  type: array
+                  items:
+                    type: integer
+                    example: 8
+                article-image:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      article_title:
+                        type: string
+                        example: "Title-3"
+                      article_description:
+                        type: string
+                        example: "Description"
+                      author_user_id:
+                        type: string
+                        example: "64d0bb49ce6db7db10e60d12"
+                      article_tag_list:
+                        type: array
+                        items:
+                          type: integer
+                          example: 7
+                      article_skill_list:
+                        type: array
+                        items:
+                          type: integer
+                          example: 8
+                      article_picture_path:
+                        type: string
+                        example: "public\\assets\\article\\article-image-1692856586973-336889679.png"
+                      _id:
+                        type: string
+                        example: "64e6f10be2990eee697e4038"
+                      article_id:
+                        type: string
+                        example: "64e6f10be2990eee697e4038"
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: "2023-08-24T05:56:27.444Z"
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: "2023-08-24T05:56:27.444Z"
+                      __v:
+                        type: integer
+                        example: 0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request."
+  /learner/getAllArticles:
+    get:
+      summary: Get all articles
+      description: Retrieve a list of articles with pagination.
+      tags:
+        - Learner - article
+      parameters:
+        - name: page_no
+          in: query
+          description: Page number
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - name: limit
+          in: query
+          description: Number of articles per page
+          required: true
+          schema:
+            type: integer
+            example: 3
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        article_title:
+                          type: string
+                          example: "Title-2"
+                        article_description:
+                          type: string
+                          example: "Description"
+                        author_user_id:
+                          type: string
+                          example: "64d0bb49ce6db7db10e60d12"
+                        article_id:
+                          type: string
+                          example: "64e2f5c488b7668c2cee0021"
+                        created_at:
+                          type: string
+                          format: date-time
+                          example: "2023-08-21T05:27:32.509Z"
+                        ArticleLikeCount:
+                          type: integer
+                          example: 0
+                  page_number:
+                    type: integer
+                    example: 1
+                  total_documents:
+                    type: integer
+                    example: 3
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request."
+  /learner/likeArticle:
+    post:
+      summary: Like an article
+      description: Like an article by providing the article ID.
+      tags:
+        - Learner - article
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                article_id:
+                  type: string
+                  example: "64e6f10be2990eee697e4038"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      article_id:
+                        type: string
+                        example: "64e6f10be2990eee697e4038"
+                      liker_user_id:
+                        type: string
+                        example: "64d0bb49ce6db7db10e60d12"
+                      _id:
+                        type: string
+                        example: "64e6f506e2990eee697e403c"
+                      article_like_id:
+                        type: string
+                        example: "64e6f506e2990eee697e403c"
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: "2023-08-24T06:13:26.779Z"
+                      __v:
+                        type: integer
+                        example: 0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request."
+  /learner/unlikeArticle:
+    post:
+      summary: Unlike an article
+      description: Unlike an article by providing the article ID.
+      tags:
+        - Learner - article
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                article_id:
+                  type: string
+                  example: "64e6f10be2990eee697e4038"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Resource deleted successfully."
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request."
+  /learner/searchArticle:
+    get:
+      summary: Search articles by keyword
+      description: Search articles by providing a keyword and pagination parameters.
+      tags:
+        - Learner - article
+      parameters:
+        - name: page_no
+          in: query
+          description: Page number
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - name: limit
+          in: query
+          description: Number of documents per page
+          required: true
+          schema:
+            type: integer
+            example: 3
+        - name: keyword
+          in: query
+          description: Keyword to search for
+          required: true
+          schema:
+            type: string
+            example: "Title-1"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      article_title:
+                        type: string
+                        example: "Title-2"
+                      article_description:
+                        type: string
+                        example: "Description"
+                      article_id:
+                        type: string
+                        example: "64e2f5c488b7668c2cee0021"
+                      page_number:
+                        type: integer
+                        example: 1
+                      total_documents:
+                        type: integer
+                        example: 3
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request."
+  /learner/addArticleComment:
+    post:
+      summary: Add a comment to an article
+      description: Add a comment to a specific article using the provided information.
+      tags:
+        - Learner - article
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                article_id:
+                  type: string
+                  example: "64de3b262588e7ffade1d3b3"
+                article_commenter_description:
+                  type: string
+                  example: "This is the comment to Article 3"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      article_id:
+                        type: string
+                        example: "64e6f10be2990eee697e4038"
+                      article_commenter_user_id:
+                        type: string
+                        example: "64d0bb49ce6db7db10e60d12"
+                      article_commenter_description:
+                        type: string
+                        example: "This is the comment to Article 3"
+                      _id:
+                        type: string
+                        example: "64e6f73e2f5ca36c66b8636c"
+                      article_comment_id:
+                        type: string
+                        example: "64e6f73e2f5ca36c66b8636c"
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: "2023-08-24T06:22:54.596Z"
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: "2023-08-24T06:22:54.597Z"
+                      __v:
+                        type: integer
+                        example: 0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request."    
+  /learner/getAllComments:
+    get:
+      summary: Get all comments for an article
+      description: Get all comments associated with a specific article using the provided information.
+      tags:
+        - Learner - article
+      parameters:
+        - name: article_id
+          in: query
+          description: ID of the article
+          required: true
+          schema:
+            type: string
+            example: "64e6f10be2990eee697e4038"
+        - name: page_no
+          in: query
+          description: Page number of the results
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - name: limit
+          in: query
+          description: Number of comments per page
+          required: true
+          schema:
+            type: integer
+            example: 3
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        article_commenter_description:
+                          type: string
+                          example: "This is the comment to Article 3"
+                        article_comment_id:
+                          type: string
+                          example: "64e6f73e2f5ca36c66b8636c"
+                  page_number:
+                    type: integer
+                    example: 1
+                  total_documents:
+                    type: integer
+                    example: 1
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request."  
+  /learner/editArticleComment:
+    put:
+      summary: Edit an article comment
+      description: Edit an existing comment associated with a specific article using the provided information.
+      tags:
+        - Learner - article
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                article_commenter_description:
+                  type: string
+                  example: "This is the comment to Article 23 (updated)"
+                article_comment_id:
+                  type: string
+                  example: "64e6f73e2f5ca36c66b8636c"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Resource updated successfully."
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request."
+  /learner/addCommentReply:
+    post:
+      summary: Add a reply to a comment
+      description: Add a new reply to an existing article comment using the provided information.
+      tags:
+        - Learner - article
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment_reply_description:
+                  type: string
+                  example: "This is the reply to 5"
+                article_comment_id:
+                  type: string
+                  example: "64e6f73e2f5ca36c66b8636c"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      comment_reply_description:
+                        type: string
+                        example: "This is the reply to 5"
+                      article_comment_id:
+                        type: string
+                        example: "64e6f73e2f5ca36c66b8636c"
+                      replier_user_id:
+                        type: string
+                        example: "64d0bb49ce6db7db10e60d12"
+                      _id:
+                        type: string
+                        example: "64e700b0db5a9c90b5e58749"
+                      comment_reply_id:
+                        type: string
+                        example: "64e700b0db5a9c90b5e58749"
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: "2023-08-24T07:03:12.118Z"
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: "2023-08-24T07:03:12.118Z"
+                      __v:
+                        type: integer
+                        example: 0
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Fail
+                  message:
+                    type: string
+                    example: "Invalid token or missing token."
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request."
+  /learner/editCommentReply:
+    put:
+      summary: Edit a reply to a comment
+      description: Edit an existing reply to an article comment using the provided information.
+      tags:
+        - Learner - article
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment_reply_description:
+                  type: string
+                  example: "This is the reply to 1 (Updated)"
+                comment_reply_id:
+                  type: string
+                  example: "64e700b0db5a9c90b5e58749"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Resource updated successfully."
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Fail
+                  message:
+                    type: string
+                    example: "Invalid token or missing token."
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request."
+  /learner/getAllCommentReplies:
+    get:
+      summary: Get all replies to a comment
+      description: Retrieve all replies to a specific article comment using the provided comment ID.
+      tags:
+        - Learner - article
+      parameters:
+        - in: query
+          name: article_comment_id
+          schema:
+            type: string
+          required: true
+          description: The ID of the article comment
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        comment_reply_description:
+                          type: string
+                          example: "This is the reply to 1 (Updated)"
+                        article_comment_id:
+                          type: string
+                          example: "64e6f73e2f5ca36c66b8636c"
+                        comment_reply_id:
+                          type: string
+                          example: "64e700b0db5a9c90b5e58749"
+                        created_at:
+                          type: string
+                          format: date-time
+                          example: "2023-08-24T07:03:12.118Z"
+                        userData:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              first_name:
+                                type: string
+                                example: "Tanish"
+                              last_name:
+                                type: string
+                                example: "Kamboj"
+                              user_id:
+                                type: string
+                                example: "64d0bb49ce6db7db10e60d12"
+                              profile_picture_path:
+                                type: string
+                                example: "public\\assets\\profile_picture-1691401033134-306149025.png"
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request."
+  /learner/getFullCommentData:
+    get:
+      summary: Get full comment data with replies
+      description: Retrieve full comment data along with its replies using the provided comment ID.
+      tags:
+        - Learner - article
+      parameters:
+        - in: query
+          name: article_comment_id
+          schema:
+            type: string
+          required: true
+          description: The ID of the article comment
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      commentData:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                            example: "64e6f73e2f5ca36c66b8636c"
+                          article_id:
+                            type: string
+                            example: "64e6f10be2990eee697e4038"
+                          article_commenter_user_id:
+                            type: string
+                            example: "64d0bb49ce6db7db10e60d12"
+                          article_commenter_description:
+                            type: string
+                            example: "This is the comment to Article 23 (updated)"
+                          article_comment_id:
+                            type: string
+                            example: "64e6f73e2f5ca36c66b8636c"
+                          created_at:
+                            type: string
+                            format: date-time
+                            example: "2023-08-24T06:22:54.596Z"
+                          updated_at:
+                            type: string
+                            format: date-time
+                            example: "2023-08-24T06:59:55.858Z"
+                          __v:
+                            type: integer
+                            example: 0
+                      replyData:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            comment_reply_description:
+                              type: string
+                              example: "This is the reply to 1 (Updated)"
+                            article_comment_id:
+                              type: string
+                              example: "64e6f73e2f5ca36c66b8636c"
+                            comment_reply_id:
+                              type: string
+                              example: "64e700b0db5a9c90b5e58749"
+                            created_at:
+                              type: string
+                              format: date-time
+                              example: "2023-08-24T07:03:12.118Z"
+                            userData:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  first_name:
+                                    type: string
+                                    example: "Tanish"
+                                  last_name:
+                                    type: string
+                                    example: "Kamboj"
+                                  user_id:
+                                    type: string
+                                    example: "64d0bb49ce6db7db10e60d12"
+                                  profile_picture_path:
+                                    type: string
+                                    example: "public\\assets\\profile_picture-1691401033134-306149025.png"
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request."
+  /learner/deleteCommentReply:
+    post:
+      summary: Delete a comment reply
+      description: Delete a comment reply using the provided comment reply ID.
+      tags:
+        - Learner - article
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment_reply_id:
+                  type: string
+                  example: "64e700b0db5a9c90b5e58749"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Resource deleted successfully."
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Fail
+                  message:
+                    type: string
+                    example: "Invalid request parameters."
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request." 
+  /learner/deleteComment:
+    post:
+      summary: Delete a comment
+      description: Delete a comment using the provided article comment ID.
+      tags:
+        - Learner - article
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                article_comment_id:
+                  type: string
+                  example: "64e6f73e2f5ca36c66b8636c"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Resource deleted successfully."
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Fail
+                  message:
+                    type: string
+                    example: "Invalid request parameters."
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request."
+  /learner/deleteArticle:
+    post:
+      summary: Delete an article
+      description: Delete an article using the provided article ID.
+      tags:
+        - Learner - article
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                article_id:
+                  type: string
+                  example: "64e6f10be2990eee697e4038"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Resource deleted successfully."
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Fail
+                  message:
+                    type: string
+                    example: "Invalid request parameters."
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request."
+  /learner/getFullArticleData:
+    get:
+      summary: Get full article data
+      description: Retrieve full data of an article along with its comments.
+      tags:
+        - Learner - article
+      parameters:
+        - in: query
+          name: article_id
+          schema:
+            type: string
+          required: true
+          description: ID of the article for which full data is requested.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        article_title:
+                          type: string
+                          example: "Title-2"
+                        article_description:
+                          type: string
+                          example: "Description"
+                        author_user_id:
+                          type: string
+                          example: "64d0bb49ce6db7db10e60d12"
+                        article_id:
+                          type: string
+                          example: "64e2f5c488b7668c2cee0021"
+                        created_at:
+                          type: string
+                          format: date-time
+                          example: "2023-08-21T05:27:32.509Z"
+                        ArticleLikeCount:
+                          type: integer
+                          example: 0
+                        articleComments:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              article_id:
+                                type: string
+                                example: "64e2f5c488b7668c2cee0021"
+                              article_commenter_user_id:
+                                type: string
+                                example: "64d0bb49ce6db7db10e60d12"
+                              article_commenter_description:
+                                type: string
+                                example: "This is the comment to Article 3"
+                              article_comment_id:
+                                type: string
+                                example: "64e70a1888f7380aac999d9d"
+                              first_name:
+                                type: string
+                                example: "Tanish"
+                              last_name:
+                                type: string
+                                example: "Kamboj"
+                              user_id:
+                                type: string
+                                example: "64d0bb49ce6db7db10e60d12"
+                              profile_picture_path:
+                                type: string
+                                example: "public\\assets\\profile_picture-1691401033134-306149025.png"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Fail
+                  message:
+                    type: string
+                    example: "Invalid request parameters."
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request."
+  /educator/insertReply:
+    post:
+      summary: Insert a reply to a review
+      description: Insert a reply to a specific review for a course.
+      tags:
+        - Educator-Course
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                review_id:
+                  type: string
+                  example: "64e77fd21772d9b11c448bf0"
+                reply_description:
+                  type: string
+                  example: "Thanks dude! - 3"
+                course_id:
+                  type: string
+                  example: "64d47ba476e1ddd13c9d4958"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      review_id:
+                        type: string
+                        example: "64e77fd21772d9b11c448bf0"
+                      replyer_user_id:
+                        type: string
+                        example: "64d0bb49ce6db7db10e60d12"
+                      reply_description:
+                        type: string
+                        example: "Thanks dude! - 3"
+                      _id:
+                        type: string
+                        example: "64e7801741e0037c3d9aa2d2"
+                      review_reply_id:
+                        type: string
+                        example: "64e7801741e0037c3d9aa2d2"
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: "2023-08-24T16:06:47.623Z"
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: "2023-08-24T16:06:47.626Z"
+                      __v:
+                        type: integer
+                        example: 0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request."
+  /educator/editReply:
+    put:
+      summary: Edit a reply to a review
+      description: Edit the content of a reply to a specific review for a course.
+      tags:
+        - Educator-Course
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                review_reply_id:
+                  type: string
+                  example: "64e7801741e0037c3d9aa2d2"
+                reply_description:
+                  type: string
+                  example: "Thanks dude!"
+                course_id:
+                  type: string
+                  example: "64d47ba476e1ddd13c9d4958"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Resource updated successfully."
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Error
+                  message:
+                    type: string
+                    example: "An error occurred while processing the request."
+  /educator/getAllReplies:
+    get:
+      summary: Get all replies for a specific review
+      description: Get a list of all replies associated with a specific review for a course.
+      tags:
+        - Educator-Course
+      parameters:
+        - name: review_id
+          in: query
+          description: The ID of the review for which replies are to be retrieved
+          required: true
+          schema:
+            type: string
+            example: "64d9ef155320f0ce6fc1fcb3"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        review_id:
+                          type: string
+                          example: "64d9ef155320f0ce6fc1fcb3"
+                        replyer_user_id:
+                          type: string
+                          example: "64d0bb49ce6db7db10e60d12"
+                        reply_description:
+                          type: string
+                          example: "Thanks dude! (Updated)"
+                        review_reply_id:
+                          type: string
+                          example: "64d9ef8996944c04e3b2f2c7"
+                        created_at:
+                          type: string
+                          format: date-time
+                          example: "2023-08-14T09:10:33.681Z"
+                        updated_at:
+                          type: string
+                          format: date-time
+                          example: "2023-08-14T09:22:22.690Z"
+                  page_number:
+                    type: integer
+                    example: 1
+                  total_documents:
+                    type: integer
+                    example: 1
+  /educator/deleteReply:
+    post:
+      summary: Delete a reply
+      description: Delete a reply for a course review.
+      tags:
+        - Educator-Course
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                review_reply_id:
+                  type: string
+                  example: "64e7801741e0037c3d9aa2d2"
+                course_id:
+                  type: string
+                  example: "64d47ba476e1ddd13c9d4958"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Resource deleted successfully."
+  /educator/addAnswer:
+    post:
+      summary: Add an answer
+      description: Add an answer for a course question.
+      tags:
+        - Educator-Course
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question_id:
+                  type: string
+                  example: "64da1031d830589b77809950"
+                answer_title:
+                  type: string
+                  example: "This is answer 3"
+                answer_description:
+                  type: string
+                  example: "This is the description of answer 3"
+                course_id:
+                  type: string
+                  example: "64d47ba476e1ddd13c9d4958"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Resource created successfully."
+  /educator/editAnswer:
+    put:
+      summary: Edit an answer
+      description: Edit an existing answer for a course question.
+      tags:
+        - Educator-Course
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                answer_id:
+                  type: string
+                  example: "64e785d6e1324b8e7d888c36"
+                answer_title:
+                  type: string
+                  example: "This is answer 1"
+                answer_description:
+                  type: string
+                  example: "This is the description of answer 1 (updated)"
+                course_id:
+                  type: string
+                  example: "64d47ba476e1ddd13c9d4958"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Resource updated successfully."
